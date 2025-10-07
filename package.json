@@ -1,0 +1,13 @@
+{
+  "name": "yuki-chat",
+  "version": "1.0.0",
+  "main": "yuki.js",
+  "type": "module",
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^6.3.0",
+    "@huggingface/inference": "^4.11.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2",
+    "openai": "^4.0.0"
+  }
+}
