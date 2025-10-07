@@ -1,299 +1,222 @@
-/* ===== TEMA YUKI NAGATO ===== */
-:root {
-    /* Paleta de colores inspirada en Yuki */
-    --yuki-dark: #2c3e50;        /* Azul oscuro misterioso */
-    --yuki-blue: #3498db;        /* Azul tecnológico */
-    --yuki-purple: #9b59b6;      /* Morado suave - toque personal */
-    --yuki-silver: #bdc3c7;      /* Plata robótico */
-    --yuki-bg: #ecf0f1;          /* Fondo claro y limpio */
-    --yuki-text: #2c3e50;        /* Texto principal */
-    --yuki-accent: #e74c3c;      /* Rojo para alertas/énfasis */
-}
-
-/* ===== RESET Y BASE ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* === Estilo general === */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  background: radial-gradient(circle at top, #1a1c25 0%, #0c0d11 100%);
+  color: #e8ebf1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
 }
 
-/* ===== CONTENEDOR PRINCIPAL ===== */
+/* === Fondo tipo "Matrix" === */
+#matrixBackground {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: black;
+  filter: blur(0.3px) brightness(1.2);
+}
+
+/* === Contenedor principal === */
+.chat-wrapper {
+  background: rgba(28, 30, 40, 0.7);
+  border: 1px solid rgba(80, 120, 255, 0.25);
+  box-shadow: 0 0 25px rgba(80, 120, 255, 0.15);
+  border-radius: 20px;
+  padding: 20px;
+  width: 85%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(12px) saturate(120%);
+}
+
+/* === Cabecera con imagen === */
+.yuki-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.yuki-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #7399ff;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(115, 153, 255, 0.5);
+}
+
+.yuki-header h1 {
+  font-size: 1.5em;
+  margin: 10px 0 0;
+  color: #b7c5ff;
+}
+
+.subtitle {
+  font-size: 0.9em;
+  color: #8fa2ff;
+}
+
+/* === Contenedor del chat === */
 .chat-container {
-    width: 400px;
-    height: 600px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border: 2px solid var(--yuki-silver);
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(20, 22, 34, 0.75);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
 }
 
-/* ===== HEADER - YUKI NAGATO ===== */
-.chat-header {
-    background: linear-gradient(135deg, var(--yuki-dark), var(--yuki-blue));
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    border-bottom: 3px solid var(--yuki-purple);
+/* === Contenedor de mensajes === */
+#messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
-.chat-header h1 {
-    font-size: 1.5em;
-    margin-bottom: 5px;
-    font-weight: 300;
-    letter-spacing: 1px;
+/* === Zona del input === */
+.input-container {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(35, 39, 59, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.status {
-    font-size: 0.8em;
-    color: #00ff00;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+.input-container input {
+  flex: 1;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1em;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 
-.status-dot {
-    width: 8px;
-    height: 8px;
-    background: #00ff00;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
+.input-container input::placeholder {
+  color: #aaa;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
+.input-container button {
+  background-color: #2b66d7;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-/* ===== ÁREA DE MENSAJES ===== */
-.chat-messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    background: var(--yuki-bg);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.input-container button:hover {
+  background-color: #414861;
 }
 
-/* Personalizar scrollbar */
-.chat-messages::-webkit-scrollbar {
-    width: 6px;
-}
-
-.chat-messages::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.chat-messages::-webkit-scrollbar-thumb {
-    background: var(--yuki-silver);
-    border-radius: 3px;
-}
-
-/* ===== BURBUJAS DE MENSAJE ===== */
-.message {
-    max-width: 80%;
-    padding: 12px 16px;
-    border-radius: 18px;
-    position: relative;
-    animation: messageAppear 0.3s ease-out;
-}
-
-@keyframes messageAppear {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Mensaje de Yuki */
-.yuki-message {
-    background: var(--yuki-blue);
-    color: white;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-    box-shadow: 2px 2px 10px rgba(52, 152, 219, 0.3);
-}
-
-/* Mensaje del usuario */
-.user-message {
-    background: white;
-    color: var(--yuki-text);
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--yuki-silver);
-}
-
-.message-time {
-    font-size: 0.7em;
-    opacity: 0.7;
-    margin-top: 5px;
-    text-align: right;
-}
-
-/* ===== INDICADOR DE TYPING ===== */
+/* === Indicador de Yuki pensando === */
 .typing-indicator {
-    background: var(--yuki-silver);
-    color: var(--yuki-text);
-    padding: 12px 16px;
-    border-radius: 18px;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-    display: flex;
-    gap: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6px 10px;
+  margin: 8px 0;
+  background: rgba(115, 153, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(115, 153, 255, 0.2);
+  font-family: monospace;
+  font-size: 1.1em;
+  color: #c5a3ff;
 }
 
-.typing-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--yuki-text);
-    border-radius: 50%;
-    animation: typingBounce 1.4s infinite ease-in-out;
+.typing-indicator::after {
+  content: "_";
+  display: inline-block;
+  width: 10px;
+  animation: blinkUnderscore 1s steps(1) infinite;
 }
 
-.typing-dot:nth-child(1) { animation-delay: -0.32s; }
-.typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-@keyframes typingBounce {
-    0%, 80%, 100% { transform: scale(0); }
-    40% { transform: scale(1); }
+@keyframes blinkUnderscore {
+  50% { opacity: 0; }
 }
 
-/* ===== ÁREA DE INPUT ===== */
-.chat-input {
-    padding: 20px;
-    background: white;
-    border-top: 1px solid var(--yuki-silver);
-    display: flex;
-    gap: 10px;
-    align-items: center;
+/* === Estilos de los mensajes === */
+.message {
+  max-width: 85%;
+  margin: 8px 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  display: inline-block;
+  animation: fadeIn 0.3s ease;
 }
 
-.chat-input input {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid var(--yuki-silver);
-    border-radius: 25px;
-    outline: none;
-    font-size: 14px;
-    transition: all 0.3s ease;
+/* === Mensajes del usuario (tú) === */
+.user-message {
+  align-self: flex-end;
+  background: linear-gradient(145deg, rgba(85, 140, 255, 0.25), rgba(50, 100, 255, 0.2));
+  color: #eaf1ff;
+  border: 1px solid rgba(100, 160, 255, 0.4);
+  box-shadow: 0 0 10px rgba(90, 140, 255, 0.25);
+  margin-left: auto;
+  text-align: right;
+  border-radius: 14px 14px 0 14px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.chat-input input:focus {
-    border-color: var(--yuki-blue);
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+.user-message:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(120, 170, 255, 0.5);
 }
 
-.chat-input button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 25px;
-    background: var(--yuki-blue);
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+/* === Mensajes de Yuki === */
+.yuki-message {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.07);
+  color: #c7bfff;
+  border: 1px solid rgba(197, 163, 255, 0.25);
+  margin-right: auto;
+  text-align: left;
+  font-family: 'Share Tech Mono', monospace;
+  animation: softGlow 4s ease-in-out infinite;
 }
 
-.chat-input button:hover {
-    background: var(--yuki-dark);
-    transform: translateY(-1px);
+/* === Animación de entrada === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.chat-input button:active {
-    transform: translateY(0);
+/* === Efecto de respiración sutil === */
+@keyframes softGlow {
+  0%, 100% { text-shadow: 0 0 4px rgba(197,163,255,0.4); }
+  50% { text-shadow: 0 0 10px rgba(197,163,255,0.8); }
 }
 
-.voice-btn {
-    background: var(--yuki-purple) !important;
+/* === Indicador "pensando" alternativo === */
+.thinking-indicator {
+  margin: 8px 0;
+  padding: 4px 10px;
+  color: #c5a3ff;
+  font-family: monospace;
+  letter-spacing: 1px;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.voice-btn:hover {
-    background: #8e44ad !important;
+.thinking-cursor {
+  display: inline-block;
+  animation: blinkCursor 0.9s steps(1) infinite;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 480px) {
-    .chat-container {
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
-        margin: 0;
-    }
-    
-    body {
-        padding: 0;
-        background: white;
-    }
-    
-    .message {
-        max-width: 90%;
-    }
-    
-    .chat-input {
-        padding: 15px;
-    }
-}
-
-/* ===== EFECTOS ESPECIALES YUKI ===== */
-.yuki-glitch {
-    position: relative;
-}
-
-.yuki-glitch::before {
-    content: attr(data-text);
-    position: absolute;
-    left: -2px;
-    text-shadow: 2px 0 var(--yuki-purple);
-    background: var(--yuki-bg);
-    overflow: hidden;
-    clip: rect(0, 900px, 0, 0);
-    animation: glitch-effect 3s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-effect {
-    0% { clip: rect(42px, 9999px, 44px, 0); }
-    5% { clip: rect(12px, 9999px, 59px, 0); }
-    10% { clip: rect(48px, 9999px, 29px, 0); }
-    15% { clip: rect(42px, 9999px, 73px, 0); }
-    20% { clip: rect(63px, 9999px, 27px, 0); }
-    25% { clip: rect(34px, 9999px, 55px, 0); }
-    30% { clip: rect(86px, 9999px, 73px, 0); }
-    35% { clip: rect(20px, 9999px, 20px, 0); }
-    40% { clip: rect(26px, 9999px, 60px, 0); }
-    45% { clip: rect(25px, 9999px, 66px, 0); }
-    50% { clip: rect(57px, 9999px, 98px, 0); }
-    55% { clip: rect(5px, 9999px, 46px, 0); }
-    60% { clip: rect(82px, 9999px, 31px, 0); }
-    65% { clip: rect(54px, 9999px, 27px, 0); }
-    70% { clip: rect(28px, 9999px, 99px, 0); }
-    75% { clip: rect(45px, 9999px, 69px, 0); }
-    80% { clip: rect(23px, 9999px, 85px, 0); }
-    85% { clip: rect(54px, 9999px, 84px, 0); }
-    90% { clip: rect(45px, 9999px, 47px, 0); }
-    95% { clip: rect(37px, 9999px, 20px, 0); }
-    100% { clip: rect(4px, 9999px, 91px, 0); }
+@keyframes blinkCursor {
+  50% { opacity: 0; }
 }
